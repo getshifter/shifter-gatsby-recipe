@@ -1,0 +1,28 @@
+# Setup Shifter Headless with Gatsby front end
+[Shifter](https://getshifter.io/) is full managed WordPress hosting with Serverless. 
+
+---
+
+Install necessary npm packages
+
+<NPMPackage name="gatsby-source-graphql" />
+
+---
+
+Install necessary Gatsby Plugins
+
+<GatsbyPlugin name="gatsby-source-graphql"
+  options={{
+    typeName: 'WORDPRESS',
+    fieldName: 'wordpress',
+    url: 'https://cms.digipresence.org/admintuts/graphql',
+  }}
+/>
+
+<GatsbyPlugin name="gatsby-plugin-graphql" />
+
+------
+
+Read more about Shifter headless
+
+https://www.getshifter.io/
