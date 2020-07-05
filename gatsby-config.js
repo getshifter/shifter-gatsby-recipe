@@ -1,4 +1,4 @@
-{
+module.exports = {
     resolve: 'gatsby-source-graphql',
     options: {
         typeName: 'WORDPRESS',
