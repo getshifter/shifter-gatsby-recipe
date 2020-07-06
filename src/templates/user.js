@@ -8,9 +8,9 @@ const UserTemplate = ({data}) => {
 
     return <>
         <div className="user">
-            <img src={avatar.url} alt={`${name}\'s Avatar`} />
+            <img src={avatar.url} alt={`${name}'s Avatar`} />
             <h2 dangerouslySetInnerHTML={{ __html: name }}></h2>
-            <div className="bio" dangerouslySetInnerHTML={{ __html: description }}></div>
+            <div className="bio">{description}</div>
             <a className="btn-external" href={url} target="new">External Link</a>
         </div>
     </>

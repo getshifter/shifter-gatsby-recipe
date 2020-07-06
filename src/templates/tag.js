@@ -7,8 +7,11 @@ const TagTemplate = ({data}) => {
 
     return <>
         <div className="tag">
-            <h2 dangerouslySetInnerHTML={{ __html: name }}> <span class="tag-count">({count})</span></h2>
-            <p dangerouslySetInnerHTML={{ __html: description }}></p>
+            <h2 dangerouslySetInnerHTML={{ __html: name }}></h2>
+            <span className="tag-count">({count})</span>
+        </div>
+        <div>
+            <p>{description}</p>
         </div>
     </>
 } 

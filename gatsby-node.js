@@ -63,7 +63,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   //Create indexes for each WordPress page
   const indexTemplate = path.resolve(`./src/templates/index.js`)
   createPage({
-    path: ``,
+    path: `/`,
     component: slash(indexTemplate)
   })
 
@@ -101,7 +101,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const { node } = edge
     const cat = node
     createPage({
-      path: `/category/${cat.slug}`,
+      path: `/categories/${cat.slug}`,
       component: slash(catTemplate),
       context: {
         id: cat.databaseId,
@@ -115,7 +115,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const { node } = edge
     const tag = node
     createPage({
-      path: `/tag/${tag.slug}`,
+      path: `/tags/${tag.slug}`,
       component: slash(tagTemplate),
       context: {
         id: tag.databaseId,
