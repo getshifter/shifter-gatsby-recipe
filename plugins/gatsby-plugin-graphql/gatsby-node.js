@@ -51,6 +51,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `)
 
+  console.log(result)
 
   // Handle errors
   if (result.errors) {
@@ -58,6 +59,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
+
+  //Create indexes for each WordPress page
+  const indexTemplate = path.resolve(`./src/templates/index.js`)
+  createPage({
+    path: ``,
+    component: slash(indexTemplate)
+  })
 
   //Create pages for each WordPress page
   const pageTemplate = path.resolve(`./src/templates/page.js`)
@@ -128,4 +136,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
+}
+
+exports.onCreateNode = ({ node }) => {
+  console.log(node.internal.type)
 }

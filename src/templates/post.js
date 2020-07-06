@@ -54,10 +54,12 @@ export const query = graphql`
     wordpress {
       post(id: $id, idType: DATABASE_ID) {
         author {
-          avatar {
-            url
+          node {
+            avatar {
+              url
+            }
+            name
           }
-          name
         }
         categories {
           edges {
