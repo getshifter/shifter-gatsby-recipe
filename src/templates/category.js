@@ -7,8 +7,9 @@ const CategoryTemplate = ({data}) => {
 
     return <>
         <div className="category">
-            <h2 dangerouslySetInnerHTML={{ __html: name }}> <span class="cat-count">({count})</span></h2>
-            <p dangerouslySetInnerHTML={{ __html: description }}></p>
+            <h2 dangerouslySetInnerHTML={{ __html: name }}></h2>
+            <span class="cat-count">({count})</span>
+            <p>{description}</p>
         </div>
     </>
 } 
