@@ -1,26 +1,32 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import '../styles/page.css'
+import React from "react"
+import { graphql } from "gatsby"
 
-const PageTemplate = ({data}) => {
-    const { title, content } = data.wordpress.page
+const PageTemplate = ({ data }) => {
+  console.log(data)
+  const { title, content } = data.wordpressPage
+  // console.log(title)
 
-    return <>
-        <div className="page">
-            <h2 dangerouslySetInnerHTML={{ __html: title }}></h2>
-            <div className="page-content" dangerouslySetInnerHTML={{ __html: content }}></div>
-        </div>
+  return (
+    <>
+      <div className="page">
+        <h2 dangerouslySetInnerHTML={{ __html: title }}></h2>
+        <div
+          className="page-content"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></div>
+      </div>
     </>
-} 
+  )
+}
 
-
-export const query = graphql`
-  query PageQuery($id: ID!) {
-    wordpress {
-      page(id: $id, idType: DATABASE_ID) {
-        content(format: RENDERED)
-        title(format: RENDERED)
-      }
+export const data = graphql`
+  query PageQuery($id: Int!) {
+    wordpressPage(wordpress_id: { eq: $id }, type: { eq: "page" }) {
+      id
+      content
+      title
+      wordpress_id
+      slug
     }
   }
 `

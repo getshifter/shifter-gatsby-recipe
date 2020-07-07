@@ -1,27 +1,33 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import '../styles/category.css'
+import React from "react"
+import { graphql } from "gatsby"
 
-const CategoryTemplate = ({data}) => {
-    const { name, count, description } = data.wordpress.category
+const CategoryTemplate = ({ data }) => {
+  const { name, description, count } = data.wordpressCategory
 
-    return <>
-        <div className="category">
-            <h2 dangerouslySetInnerHTML={{ __html: name }}></h2>
-            <span className="cat-count">({count})</span>
-            <p>{description}</p>
-        </div>
+  return (
+    <>
+      <div
+        className="category"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        Category Name: <h1 dangerouslySetInnerHTML={{ __html: name }}></h1>
+        Category Count: <div class="cat-count">({count})</div>
+        Category Description:{" "}
+        <p dangerouslySetInnerHTML={{ __html: description }}></p>
+      </div>
     </>
-} 
+  )
+}
 
 export const query = graphql`
-  query CategoryQuery($id: ID!) {
-    wordpress {
-      category(id: $id, idType: DATABASE_ID) {
-        name
-        count
-        description
-      }
+  query CategoryQuery($id: Int!) {
+    wordpressCategory(wordpress_id: { eq: $id }) {
+      count
+      id
+      name
+      slug
+      description
+      wordpress_id
     }
   }
 `
