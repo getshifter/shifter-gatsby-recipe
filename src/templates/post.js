@@ -1,17 +1,16 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-import '../styles/post.css'
 
 const PostTemplate = ({data}) => {
-    const { title, content, date, author, excerpt, categories, tags } = data.wordpress.post
+    const { title, content, date, author, excerpt, categories, tags } = data.wordpressPost
 
     return <>
-        <article className="post">
+        <article className="post" style={{display: 'flex', flexDirection: 'column'}}>
 
-            <h2 dangerouslySetInnerHTML={{ __html: title }}></h2>
-            <p dangerouslySetInnerHTML={{ __html: excerpt }}></p>
+            Post Title: <h1 dangerouslySetInnerHTML={{ __html: title }}></h1>
+            Post Excerpt: <p dangerouslySetInnerHTML={{ __html: excerpt }}></p>
 
-            <div className="post-meta">
+            <div className="post-meta"  style={{display: 'flex', flexDirection: 'row'}}>
                 <span>
                 Posted by <Link to={`/user/${author.slug}`}>{author.name}</Link>
                 </span>
@@ -19,73 +18,72 @@ const PostTemplate = ({data}) => {
                 <span>{date}</span>
                 {`|`}
                 <div className="categories">
+                    Post Categories:
                     {
-                        categories.edges.map(cat => {
-                            const category = cat.node
-                            return (
-                                <Link className="cat" key={category.id} to={`/categories/${category.slug}`}>
-                                    <span>{category.name}</span>
-                                </Link>
-                            )
-                        })
+                        categories.map(cat => (
+                            <Link className="cat" key={cat.id} to={`/categories/${cat.slug}`}>
+                                <span>{cat.name}</span>
+                            </Link>
+                        ))
                     }
                 </div>
                 {`|`}
                 <div className="tags">
+                    Post Tags:
                     {
-                        tags.edges.map(tag => {
-                            const theTag = tag.node
-                            return (
-                                <Link className="tag" key={theTag.id} to={`/tags/${theTag.slug}`}>
-                                    <span>{theTag.name}</span>
-                                </Link>
-                            )
-                        })
+                        tags.map(tag => (
+                            <Link className="tag" key={tag.id} to={`/tags/${tag.slug}`}>
+                                <span>{tag.name}</span>
+                            </Link>
+                        ))
                     }
                 </div>
             </div>
-            <div className="post-content" dangerouslySetInnerHTML={{ __html: content }}></div>
+            Post Body: <div className="post-content" dangerouslySetInnerHTML={{ __html: content }}></div>
         </article>
     </>
 } 
 
 export const query = graphql`
-  query BlogPostQuery($id: ID!) {
-    wordpress {
-      post(id: $id, idType: DATABASE_ID) {
+  query BlogPostQuery($id: Int!) {
+    wordpressPost(wordpress_id: { eq: $id }, type: { eq: "post" }) {
+        id
         author {
-          node {
-            avatar {
-              url
-            }
-            name
+          slug
+          url
+          name
+          id
+          wordpress_id
+          description
+          avatar_urls {
+            wordpress_24
+            wordpress_48
+            wordpress_96
           }
         }
+        content
+        excerpt
+        date(formatString: "MMMM DD, YYYY")
+        slug
+        title
+        wordpress_id
+        sticky
         categories {
-          edges {
-            node {
-              slug
-              name
-              id
-            }
-          }
+          name
+          slug
+          wordpress_id
+          id
+          description
+          count
         }
         tags {
-          edges {
-            node {
-              slug
-              name
-              id
-            }
-          }
+          id
+          slug
+          name
+          description
+          count
+          wordpress_id
         }
-        date
-        content(format: RENDERED)
-        excerpt(format: RENDERED)
-        title(format: RENDERED)
-        slug
-        databaseId
-      }
     }
   }
 `

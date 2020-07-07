@@ -1,108 +1,83 @@
-# Setup Shifter Headless with Gatsby front end
+# shifter-gatsby-recipe
 
-[Shifter](https://getshifter.io/) is full managed WordPress hosting with Serverless. 
+This recipe configures a Gatsby starter theme for using WordPress powered by [Shifter](https://getshifter.io/).
 
 ---
 
-Install necessary npm packages
+Install necessary NPM packages
 
 <NPMPackage name="gatsby" />
 <NPMPackage name="gatsby-image" />
 <NPMPackage name="gatsby-plugin-manifest" />
 <NPMPackage name="gatsby-plugin-offline" />
-<NPMPackage name="gatsby-source-graphql" />
+<NPMPackage name="gatsby-source-wordpress" />
 <NPMPackage name="gatsby-source-filesystem" />
 <NPMPackage name="react" />
 <NPMPackage name="react-dom" />
 
 ---
 
-Setup files
+Install `gatsby-source-wordpress`
+
+<GatsbyPlugin name="gatsby-source-wordpress" options={{
+  baseUrl: `example.hl-b.getshifter.co`,
+  protocol: `https`,
+  hostingWPCOM: false,
+  useACF: false,
+  includedRoutes: [
+      "**/posts",
+      "**/pages",
+      "**/users",
+      "**/categories",
+      "**/tags",
+  ]
+}} />
+
+---
+
+Import recipe config
 
 <File
-  path="gatsby-config.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/gatsby-config.js"
+  path="gatsby-node.js"
+  content="https://raw.githubusercontent.com/getshifter/shifter-gatsby-recipe/master/gatsby-node.js"
 />
 
-<File
-  path="./gatsby-node.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/gatsby-node.js"
-/>
+---
+
+Import recipe templates
 
 <File
   path="src/templates/index.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/templates/index.js"
-/>
-<File
-  path="src/styles/index.css"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/styles/index.css"
+  content="https://raw.githubusercontent.com/getshifter/shifter-gatsby-recipe/master/src/templates/index.js"
 />
 
 <File
   path="src/templates/post.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/templates/post.js"
+  content="https://raw.githubusercontent.com/crock/gatsby-recipe-headless-wordpress/master/restapi-src/templates/post.js"
 />
-<File
-  path="src/styles/post.css"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/styles/post.css"
-/>
-
 
 <File
   path="src/templates/page.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/templates/page.js"
+  content="https://raw.githubusercontent.com/crock/gatsby-recipe-headless-wordpress/master/restapi-src/templates/page.js"
 />
-<File
-  path="src/styles/page.css"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/styles/page.css"
-/>
-
 
 <File
   path="src/templates/category.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/templates/category.js"
+  content="https://raw.githubusercontent.com/crock/gatsby-recipe-headless-wordpress/master/restapi-src/templates/category.js"
 />
-<File
-  path="src/styles/category.css"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/styles/category.css"
-/>
-
 
 <File
   path="src/templates/tag.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/templates/tag.js"
+  content="https://raw.githubusercontent.com/crock/gatsby-recipe-headless-wordpress/master/restapi-src/templates/tag.js"
 />
-<File
-  path="src/styles/tag.css"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/styles/tag.css"
-/>
-
 
 <File
   path="src/templates/user.js"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/templates/user.js"
-/>
-<File
-  path="src/styles/user.css"
-  content="https://raw.githubusercontent.com/hugtechio/shifter-gatsby-recipe/master/src/styles/user.css"
+  content="https://raw.githubusercontent.com/crock/gatsby-recipe-headless-wordpress/master/restapi-src/templates/user.js"
 />
 
 ---
 
-Install necessary Gatsby Plugins
-
-<GatsbyPlugin name="gatsby-source-graphql"
-  options={{
-    typeName: 'WORDPRESS',
-    fieldName: 'wordpress',
-    url: 'https://cms.digipresence.org/admintuts/graphql',
-  }}
-/>
-
-<GatsbyPlugin name="gatsby-plugin-graphql" />
-
----
-
-Read more about Shifter headless
+Learn more about Shifter, a modern WordPress hosting platform built for the Jamstack.
 
 https://www.getshifter.io/

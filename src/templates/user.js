@@ -1,34 +1,33 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import '../styles/user.css'
 
 const UserTemplate = ({data}) => {
-    const { firstName, lastName, username, description, url, avatar } = data.wordpress.user
-    const name = `${firstName} ${lastName} (@${username})`
+    const { name, description, url, avatar_urls } = data.wordpressWpUsers
 
     return <>
-        <div className="user">
-            <img src={avatar.url} alt={`${name}'s Avatar`} />
-            <h2 dangerouslySetInnerHTML={{ __html: name }}></h2>
-            <div className="bio">{description}</div>
-            <a className="btn-external" href={url} target="new">External Link</a>
+        <div className="user" style={{display: 'flex', flexDirection: 'column'}}>
+            Author Avatar: <img src={avatar_urls.wordpress_96} alt={`${name}'s Avatar`} />
+            Author Name: <h1 dangerouslySetInnerHTML={{ __html: name }}></h1>
+            Author Bio: <div className="bio" dangerouslySetInnerHTML={{ __html: description }}></div>
+            Author Homepage: <a className="btn-external" href={url} target="new">External Link</a>
         </div>
     </>
 } 
 
 export const query = graphql`
-  query UserQuery($id: ID!) {
-    wordpress {
-      user(id: $id, idType: DATABASE_ID) {
-        avatar {
-          url
-        }
-        firstName
-        lastName
-        username
-        url
+  query UserQuery($id: Int!) {
+    wordpressWpUsers(wordpress_id: { eq: $id }) {
+        id
         description
-      }
+        name
+        slug
+        url
+        wordpress_id
+        avatar_urls {
+          wordpress_24
+          wordpress_48
+          wordpress_96
+        }
     }
   }
 `
