@@ -1,23 +1,21 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from "react";
+import { graphql } from "gatsby";
 
 const PageTemplate = ({ data }) => {
-  console.log(data)
-  const { title, content } = data.wordpressPage
-  // console.log(title)
+  console.log(data);
+  const { title, content } = data.wordpressPage;
 
   return (
     <>
-      <div className="page">
+      <div className='page'>
         <h2 dangerouslySetInnerHTML={{ __html: title }}></h2>
         <div
-          className="page-content"
-          dangerouslySetInnerHTML={{ __html: content }}
-        ></div>
+          className='page-content'
+          dangerouslySetInnerHTML={{ __html: content }}></div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const data = graphql`
   query PageQuery($id: Int!) {
@@ -29,6 +27,6 @@ export const data = graphql`
       slug
     }
   }
-`
+`;
 
-export default PageTemplate
+export default PageTemplate;
